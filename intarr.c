@@ -12,12 +12,14 @@ int main(){
 */
 
 int main(){
-    int nums[2][3] = {{1, 2, 3}, {4, 5, 6}};
-    for (int i = 0; i < sizeof(nums)/sizeof(nums[0]); i++){
-        for (int j = 0; j < sizeof(nums[1][2]); j++){
-            printf("%d", nums[i][j]);
+    int nums[2][3] = {{1, 2, 3}, {4, 5, 6}};    // 2 is the number of rows, 3 is the number of columns
+    for(int i = 0; i < 2; i++){                 // 2 is the number of rows
+        for(int j = 0; j < 3; j++){             // 3 is the number of columns
+            printf("%d ", nums[i][j]);          // nums[i][j] is the element at row i and column j
         }
+        printf("\n");
     }
+
 
     
 }
