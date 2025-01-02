@@ -1,25 +1,45 @@
 #include <stdio.h>
-#include <string.h>
-/*
-int main(){
-    int num[] = {1, 2, 3, 4};
-    for (int i = 0; i < sizeof(num)/sizeof(num[0]); i++)  // sizeof(num) returns the size of the array in bytes
-    {
-        printf("%d", num[i]);
-    }
-    
-}
-*/
 
-int main(){
-    int nums[2][3] = {{1, 2, 3}, {4, 5, 6}};    // 2 is the number of rows, 3 is the number of columns
-    for(int i = 0; i < 2; i++){                 // 2 is the number of rows
-        for(int j = 0; j < 3; j++){             // 3 is the number of columns
-            printf("%d ", nums[i][j]);          // nums[i][j] is the element at row i and column j
+// Initializes all elements in the nums array to 0
+int rows_and_cols(int nums[][3], int a, int b){
+    for(int i = 0; i < a; i++){
+        for(int j = 0; j < b; j++){
+            nums[i][j] = 0;
         }
-        printf("\n");
     }
+    return 0;
+}
 
+// Reads in values from the user and stores them in the nums array
+void num_array(int nums[][3], int a, int b){
+    printf("Enter %d numbers: ", a * b);
+    for (int i = 0; i < a; i++){
+        for(int j = 0; j < b; j++){
+            scanf("%d", &nums[i][j]);
+        }
+    }
+}
 
-    
+int main(){
+    int a, b;
+    printf("Enter a number of rows: ");
+    scanf("%d", &a);
+    printf("Enter a number of column: ");
+    scanf("%d", &b);
+    int nums[a][b];  // declare nums array with a rows and b columns
+
+    rows_and_cols(nums, a, b);  // initialize all elements in the nums array to 0
+    num_array(nums, a, b);  // read in values from the user and store them in the nums array
+
+    int sum = 0;    
+    for(int i = 0; i < a; i++){  // loop through each row of the nums array
+        for(int j = 0; j < b; j++){  // loop through each column of the nums array
+            printf("%d ", nums[i][j]);  // print the element at row i and column j
+            sum += nums[i][j];  // add the element to the sum variable
+        }
+        printf("\n");  // print a newline character to separate rows
+    }
+    printf("Sum of all elements: %d", sum);  // print the sum of all elements in the nums array
+
+    return 0;
 }
