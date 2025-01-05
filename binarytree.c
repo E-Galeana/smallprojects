@@ -1,15 +1,15 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-struct Node
+typedef struct Node
 {
     int data;
     struct Node *left;
     struct Node *right;
-};
+} Node;
 
-struct Node* createNode(int data) {
-    struct Node *newNode = malloc(sizeof(*newNode));
+Node* createNode(int data) {
+    Node *newNode = malloc(sizeof(*newNode));
     if (newNode == NULL) {
         printf("Memory allocation failed\n");
         exit(1);
@@ -21,7 +21,7 @@ struct Node* createNode(int data) {
     return newNode;
 }
 
-struct Node* insertNode(struct Node *root, int value) {
+Node* insertNode(Node *root, int value) {
     if (root == NULL) {
         return createNode(value);
     }
@@ -34,17 +34,27 @@ struct Node* insertNode(struct Node *root, int value) {
     return root;
 } 
 
+Node* preOrder(Node *root) {
+    if (root == NULL) {
+        return root;
+    }
+
+    printf("%d\n", root->data);
+    preOrder(root->left);
+    preOrder(root->right);
+
+    return root;
+}
+
 int main() {
     struct Node *root = NULL;
 
     root = insertNode(root, 10);
-    root = insertNode(root, 4);
     root = insertNode(root, 5);
     root = insertNode(root, 11);
 
-    printf("Tree root is: %d\n", root->data);
-    printf("The left child is: %d\n", root->left->data);
-    printf("The right child is: %d\n", root->right->data);
+    printf("Pre order traversal:\n");
+    preOrder(root);
 
     return 0;
 }
