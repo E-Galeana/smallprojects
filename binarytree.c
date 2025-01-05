@@ -1,5 +1,7 @@
 #include <stdlib.h>
+#include <string.h>
 #include <stdio.h>
+
 
 typedef struct Node
 {
@@ -46,12 +48,41 @@ Node* preOrder(Node *root) {
     return root;
 }
 
-int main() {
-    struct Node *root = NULL;
+int getInput() {
+    char buf[100];
+    int value;
 
-    root = insertNode(root, 10);
-    root = insertNode(root, 5);
-    root = insertNode(root, 11);
+    while(1) {
+        printf("Insert a value in the tree or type 'exit' to quit: \n");
+        if (fgets(buf, sizeof(buf), stdin) == NULL) {
+            printf("Error: Input is not valid\n");
+            continue;
+        }
+
+        buf[strcspn(buf, "\n")] = 0;
+
+        if (strcmp(buf, "exit") == 0){
+            return -1;;
+        }
+        
+        if (sscanf(buf, "%d", &value) == 1) {
+            return value;
+        } else {
+            printf("Error: Invalid input\n");
+        }
+    }
+}
+
+int main() {
+    Node *root = NULL;
+
+    while(1) {
+        int value = getInput();
+        if (value == -1) {
+            break;
+        }
+        root = insertNode(root, value);
+    }
 
     printf("Pre order traversal:\n");
     preOrder(root);
