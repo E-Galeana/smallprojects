@@ -40,9 +40,14 @@ ListNode* addNode(ListNode *head, int value) {
 
 void printList(ListNode* node) {
     while (node != NULL) {
-        printf("%d -> ", node->data);
+        printf("%d", node->data);
         node = node->next;
+
+        if (node != NULL) {
+            printf(" -> ");
+        }
     }
+    printf(" -> NULL\n");
 }
 
 int nodeInput() {
@@ -70,6 +75,15 @@ int nodeInput() {
     }
 }
 
+void freeList(ListNode* head) {
+    ListNode* temp; 
+    while (head != NULL) {
+        temp = head;
+        head = head->next;
+        free(temp);
+    }
+}
+
 int main() {
     ListNode* head = NULL;
 
@@ -82,6 +96,12 @@ int main() {
         head = addNode(head, input);
     }
 
-    printf("Linked list:\n");
-    printList(head);
+    if (head == NULL) {
+        printf("The list is empty");
+    } else {
+        printf("Linked list: \n");
+        printList(head);
+    }
+    freeList(head);
+    return 0;
 }
